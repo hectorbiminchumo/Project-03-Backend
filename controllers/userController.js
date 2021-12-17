@@ -9,12 +9,13 @@ exports.create = async (req, res) => {
 
 	// 1. OBTENER USUARIO, EMAIL Y PASSWORD DEL FORMULARIO (REQ)
 	const { 
-		nombre,
-		apellido,
-		pais,
-		direccion,
+		firstName,
+		lastName,
 		email,
-		password
+		password,
+		city,
+		country,
+        phone
 	 } = req.body
 
 	// 2A. REALIZAR EL PROCESO ASÍNCRONO
@@ -26,11 +27,12 @@ exports.create = async (req, res) => {
 
 		// 4. CREAR USUARIO EN BASE DE DATOS
 		const newUser = await User.create({
-			nombre,
-			apellido,
-			pais,
-			direccion,
-			email,
+			firstName,
+		    lastName,
+		    email,
+		    city,
+		    country,
+            phone,
 			password: hashedPassword
 		})
 
@@ -53,7 +55,7 @@ exports.create = async (req, res) => {
 				if(error) throw error
 
 				res.json({
-					msg: "Token correctamente generado.",
+					msg: "Token generated",
 					data: token
 				})
 			}
@@ -63,7 +65,7 @@ exports.create = async (req, res) => {
 	} catch (error) {
 	// 2B. EN CASO DE ERROR CON AWAIT
 		res.status(500).json({
-			msg: "Hubo un error con la creación de usuario.",
+			msg: "Creating user error.",
 			error: error
 		})
 
@@ -87,7 +89,7 @@ exports.login = async (req, res) => {
 		// 3. VALIDACIÓN - SI NO HUBO UN USUARIO...
 		if(!foundUser) {
 			return res.status(400).json({
-				msg: "El usuario o la contraseña son incorrectos."
+				msg: "Wrong user or password"
 			})
 		}
 
@@ -97,7 +99,7 @@ exports.login = async (req, res) => {
 		// 5. VALIDACIÓN - SI EL PASSWORD NO COINCIDE...
 		if(!verifiedPass) {
 			return await res.status(400).json({
-				msg: "El usuario o la contraseña no coinciden."
+				msg: "Validate user or password"
 			})
 		}
 
@@ -123,7 +125,7 @@ exports.login = async (req, res) => {
 				if(error) throw error
 
 				res.json({
-					msg: "Inicio de sesión exitoso.",
+					msg: "Login successfully",
 					data: token
 				})
 			}
@@ -135,7 +137,7 @@ exports.login = async (req, res) => {
 	} catch (error) {
 		console.log(error)
 		res.status(500).json({
-			msg: "Hubo un problema con la autenticación.",
+			msg: "Authentication failed",
 			data: error
 		})
 	}
@@ -155,7 +157,7 @@ exports.verifyToken = async (req, res) => {
 		const foundUser = await User.findById(req.user.id).select("-password")
 
 		return res.json({
-			msg: "Datos de usuario encontrados.",
+			msg: "Found user",
 			data: foundUser
 		})
 
@@ -164,7 +166,7 @@ exports.verifyToken = async (req, res) => {
 			console.log(error)
 
 			res.status(500).json({
-				msg: "Hubo un error con el usuario"
+				msg: "User error"
 			})
 	}
 
