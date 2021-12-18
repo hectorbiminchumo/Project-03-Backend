@@ -1,34 +1,42 @@
-// ./server/models/Guitar.js
 
 // 1. IMPORTACIONES
 const mongoose = require("mongoose")
 
 // 2. SCHEMA
-const guitarSchema = mongoose.Schema({
-	nombre: {
+const bookUsedSchema = mongoose.Schema({
+	title: {
 		type: String,
 		required: true
 	},
-	precio: {
+    author: {
+		type: String,
+		required: true
+	},
+    description: {
+		type: String,
+		required: true
+	},
+	price: {
 		type: Number,
 		required: true
 	},
-	color: {
+	condition: {
 		type: String,
 		required: true
 	},
-	imagen: {
+	image: {
 		type: String,
 		required: true
 	},
-	descripcion: {
-		type: String,
-		required: true
-	}
+    pages:{
+        type: Number,
+        required: true
+    }
+	
 })
 
 // 3. MODELO
-const Guitar = mongoose.model("Guitar", guitarSchema)
+const BookUsed = mongoose.model("BookUsed", bookUsedSchema)
 
 // 4. EXPORTACIÓN
-module.exports = Guitar
+module.exports = BookUsed
