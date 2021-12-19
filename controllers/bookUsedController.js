@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
 			pages
 		 } = req.body
 
-	// CREAR UN libro EN BASE DE DATOS
+	// CREAR UN LIBRO USADO EN BASE DE DATOS
 	try {
 		const newBookUsed = await BookUsed.create({
 			title,
@@ -72,7 +72,7 @@ exports.readOne = async (req, res) => {
 	const { id } = req.params
 
 	try {
-		
+		//Se busca por ID y se muestra el libro usado
 		const bookUsed = await BookUsed.findById(id)
 
 		res.json({
@@ -106,6 +106,7 @@ exports.edit = async (req, res) => {
 
 
 	try {
+        //Se busca por ID y se actualiza el libro usado
 		const updatedBookUsed = await BookUsed.findByIdAndUpdate(
 			id, // ID DE LIBRO
 			{
@@ -142,7 +143,7 @@ exports.delete = async (req, res) => {
 	const { id } = req.params
 
 	try {
-		
+		//Se busca por ID y se elimina el libro usado
 		const deletedBookUsed = await BookUsed.findByIdAndRemove({_id: id})
 
 		res.json({

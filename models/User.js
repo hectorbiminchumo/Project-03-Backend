@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema({
 	},
 	lastName: {
         type: String,
+		required:true,
 		default: ""
 	},
     email: {
@@ -23,14 +24,19 @@ const userSchema = mongoose.Schema({
     },
 	city: {
 		type: String,
+		required: true,
 		default: ""
 	},
 	country: {
 		type: String,
+		required: true,
 		default: ""
 	},
 	phone: {
 		type: Number,
+		unique: true,
+		required: true,
+		
 		default: ""
 	},
 })
