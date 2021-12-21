@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
 	lastName: {
         type: String,
 		required:true,
-		default: ""
+		
 	},
     email: {
         type: String,
@@ -24,12 +24,10 @@ const userSchema = mongoose.Schema({
     },
 	city: {
 		type: String,
-		required: true,
 		default: ""
 	},
 	country: {
 		type: String,
-		required: true,
 		default: ""
 	},
 	phone: {
@@ -37,7 +35,7 @@ const userSchema = mongoose.Schema({
 		unique: true,
 		required: true,
 		
-		default: ""
+		
 	},
 })
 
