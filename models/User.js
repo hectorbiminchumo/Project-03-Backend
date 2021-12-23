@@ -34,9 +34,11 @@ const userSchema = mongoose.Schema({
 		type: Number,
 		unique: true,
 		required: true,
-		
-		
 	},
+	admin:{
+		type:Boolean,
+		default: false
+	}
 })
 
 // 3. MODELOS
